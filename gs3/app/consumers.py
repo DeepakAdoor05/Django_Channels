@@ -14,7 +14,7 @@ class MySyncConsumer(SyncConsumer):
     def websocket_receive(self,event):  # predefined hanlers
         print("Message received from Client",event)  # Here the server receives message from the client
         print(event['text'])
-        for i in range(50):
+        for i in range(10):
             self.send({
                 'type' : "websocket.send",
                 'text' : str(i)
@@ -40,7 +40,7 @@ class MyASyncConsumer(AsyncConsumer):
     async def websocket_receive(self,event):  # predefined hanlers
         print("Message received from Client",event)  # Here the server receives message from the client
         print(event['text'])
-        for i in range(50):
+        for i in range(10):
             await self.send({
                 'type' : "websocket.send",
                 'text' : str(i)
