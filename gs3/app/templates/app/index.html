@@ -7,5 +7,29 @@
 </head>
 <body>
     <h1>Count Page</h1>
+
+    <script>
+        var ws = new WebSocket('ws://127.0.0.1:8000/ws/sc/')
+
+        <!--WebSocket Properties-->
+        <!--onopen Property called when connections ready state = 1-->
+        ws.onopen = function(){
+            console.log('Websocket Connection Open...')
+            ws.send('Hi, Message from client')
+            <!--This message is sent to the websocket_receive handler in consumers.py-->
+        }
+        <!--onmessage property called when a message is received from the server-->
+        ws.onmessage = function(event){
+            console.log('Message received from server...',event)
+        }
+        <!--onerror property is called when an error occurs on the Websocket-->
+        ws.onerror = function(event){
+            console.log('Websocket  Error Occured...',event)
+        }
+        <!--onclose property is called when the WebSocket connections ready state changes to CLOSED-->
+        ws.onclose = function(event){
+            console.log('Websocket Connection Closed...',event)
+        }
+    </script>
 </body>
 </html>
