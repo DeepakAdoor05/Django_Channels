@@ -12,8 +12,7 @@ class MySyncConsumer(SyncConsumer):
     # 'websocket_connect' handler is called when client initially opens a connection and is about to finish the websocket handshake.
 
     def websocket_receive(self,event):  # predefined hanlers
-        print("Message received from Client",event)  # Here the server receives message from the client
-        print(event['text'])
+        print("Message received from Client",event['text'])  # Here the server receives message from the client
         for i in range(10):
             self.send({
                 'type' : "websocket.send",
