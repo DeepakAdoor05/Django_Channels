@@ -11,7 +11,7 @@
     <script>
         var ws = new WebSocket('ws://127.0.0.1:8000/ws/sc/')
 
-        {% comment %} <!--WebSocket Properties-->
+        <!--WebSocket Properties-->
         <!--onopen Property called when connections ready state = 1-->
         ws.onopen = function(){
             console.log('Websocket Connection Open...')
@@ -29,9 +29,9 @@
         <!--onclose property is called when the WebSocket connections ready state changes to CLOSED-->
         ws.onclose = function(event){
             console.log('Websocket Connection Closed...',event)
-        } {% endcomment %}
+        }
 
-        <!--WebSocket Events-->
+        {% comment %} <!--WebSocket Events-->
         <!--onopen Property called when connections ready state = 1-->
         ws.addEventListener('open', (event) => {
             console.log('Websocket Connection Open...',event)
@@ -49,7 +49,7 @@
         <!--onclose property is called when the WebSocket connections ready state changes to CLOSED-->
         ws.addEventListener('close', (event) => {
             console.log('Websocket Connection Closed...',event)
-        })
+        }) {% endcomment %}
     </script>
 </body>
 </html>
