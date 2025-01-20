@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Count Page</h1>
-
+    <h2 id="ct"></h2>
     <script>
         var ws = new WebSocket('ws://127.0.0.1:8000/ws/sc/')
 
@@ -15,12 +15,18 @@
         <!--onopen Property called when connections ready state = 1-->
         ws.onopen = function(){
             console.log('Websocket Connection Open...')
-            ws.send('Hi, Message from client')
+            ws.send('Hi, Message from client to server...')
             <!--This message is sent to the websocket_receive handler in consumers.py-->
         }
         <!--onmessage property called when a message is received from the server-->
         ws.onmessage = function(event){
-            console.log('Message received from server...',event)
+            console.log('EVENT...',event)
+            console.log('Message received from server...',event.data)
+            console.log('Tyoe of event data',typeof(event.data))
+            var data = JSON.parse(event.data)
+            console.log('Parsed data',data)
+            console.log('Tyoe of event data',typeof(data))
+            document.getElementById("ct").innerText=data.count
         }
         <!--onerror property is called when an error occurs on the Websocket-->
         ws.onerror = function(event){
