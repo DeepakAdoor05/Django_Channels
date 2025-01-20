@@ -2,6 +2,8 @@ from channels.consumer import SyncConsumer,AsyncConsumer
 from channels.exceptions import StopConsumer
 from time import sleep
 import asyncio
+import json
+
 class MySyncConsumer(SyncConsumer):
 
     def websocket_connect(self,event):  # predefined hanlers
@@ -11,12 +13,21 @@ class MySyncConsumer(SyncConsumer):
         })
     # 'websocket_connect' handler is called when client initially opens a connection and is about to finish the websocket handshake.
 
+    # def websocket_receive(self,event):  # predefined hanlers
+    #     print("Message received from Client",event['text'])  # Here the server receives message from the client
+    #     for i in range(10):
+    #         self.send({
+    #             'type' : "websocket.send",
+    #             'text' : str(i)
+    #         }) # Here the message is sent to the client by the server
+    #         sleep(1) # Slow down 1s after each iteration.
+
     def websocket_receive(self,event):  # predefined hanlers
         print("Message received from Client",event['text'])  # Here the server receives message from the client
         for i in range(10):
             self.send({
                 'type' : "websocket.send",
-                'text' : str(i)
+                'text' : json.dumps({"count":i})    # sending a dictionary
             }) # Here the message is sent to the client by the server
             sleep(1) # Slow down 1s after each iteration.
 
