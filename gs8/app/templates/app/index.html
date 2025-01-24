@@ -7,19 +7,32 @@
 </head>
 <body>
     <h1>Chat app</h1>
+    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <input type="text" id="chat-message-input" size="100">
+    <input type="button" id="chat-message-submit" value="Send">
 
     <script>
         var ws = new WebSocket('ws://127.0.0.1:8000/ws/sc/')
 
         ws.onopen = function (){
             console.log('Websocket connection open...')
+            ws.send('Hi, from client')
         }
         ws.onmessage = function (event){
             console.log('Message received from server',event)
         }
         ws.onclose = function (event){
-            console.log('Websocket connection closed unexpectedly', event)
-        }
+            console.error('Websocket connection closed unexpectedly', event)
+        };
+        document.getElementById('chat-message-submit').onclick = function(event) {
+            const messageInputDom = document.getElementById('chat-message-input')
+            const message = messageInputDom.value;
+            ws.send(JSON.stringify({
+                'msg': message
+            }));
+            messageInputDom.value = ''
+        };
+        
     </script>
 </body>
 </html>
